@@ -19,5 +19,22 @@ jobs:
           node-version: 16.x
 
       - run: npm ci
-      - run: npm run test
+      - run: npm run test -- --coverage
       - run: npm run build
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: backend/coverage/**
+          retention-days: 5
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: backend/dist/index.js
+          retention-days: 5
+
+# workflow
+# on: トリガー
+# job: 実行するもの 複数のstepからなる usesやactionsを使う
+
+# アーティファクト：ビルド結果の成果物など
